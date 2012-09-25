@@ -1,0 +1,16 @@
+<div id="leaderboard-module">
+	<div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+
+	<div>
+		<div class="select-view-text"><strong>Select View: </strong></div>
+		<div id="viewPicker">
+			<div id="overall" class="view-selector active">Overall Points</div>
+			<div class="view-selector-spacer"> | </div>
+			<div id="money" class="view-selector">Money Winners</div>	
+		</div>
+	</div>
+
+	<div id="leaderboard"></div>
+</div>
+
+<squarespace:script src="leaderboard.js" combo="true" />

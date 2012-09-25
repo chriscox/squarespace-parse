@@ -1,0 +1,76 @@
+<div class="article-wrapper">
+
+{.section item}
+
+<article class="{@|item-classes}" id="article-{id}" data-item-id="{id}">
+
+  <!--SPECIAL CONTENT-->
+
+  {.section promotedBlock}
+    <div class="special-content">{@}</div> 
+  {.end}
+
+
+  <!--POST HEADER-->
+    
+  <header>
+    <h1 class="entry-title">
+      {.passthrough?}
+        <a href="{sourceUrl}">{title} <span>&rarr;</span></a>
+      {.or}
+        <a href="{fullUrl}">{title}</a>
+      {.end}
+    </h1>
+    <div class="meta">
+      <span class="date"><time class="published" datetime="{addedOn|date %F}">{addedOn|date %B %e, %G}</time></span>
+    </div>
+  </header>
+    
+  <!--POST BODY-->
+  
+
+  {.section body}<div class="body entry-content">{@}</div>{.end}
+
+              
+  <!--POST FOOTER-->
+    
+  <footer>
+    <div class="meta">
+
+      {postItemInjectCode}
+
+      <div class="first meta-row">
+        {.section categories}<span class="categories"><span class="categories-title">In</span> {.repeated section @}<a href="{collection.fullUrl}?category={@|url-encode}" rel="tag">{@}</a>{.alternates with}, {.end}</span>{.end}
+        {.section tags}<span class="tags"><span class="tags-title">Tags</span> {.repeated section @}<a href="{collection.fullUrl}?tag={@|url-encode}" rel="tag">{@}</a>{.alternates with}, {.end}</span>{.end}
+      </div>
+
+      <div class="second meta-row">
+        {@|like-button}
+        {@|social-button-inline}
+      	{.passthrough?}{.or}{.section sourceUrl}<span class="source"><a href="{sourceUrl}" target="_blank">Source</a></span>{.end}{.end} 
+      </div>
+
+    </div>
+  </footer>
+    
+  
+  </article>
+{.end}
+
+
+<!--PAGINATION-->
+  
+{.section pagination}
+  <nav class="pagination clear">
+      {.section prevItem}<a class="prev-item" href="{fullUrl}">&larr; {title}</a>{.end}{.section nextItem}<a class="next-item" href="{fullUrl}">{title} &rarr;</a>{.end}
+  </nav>
+{.end}
+
+
+  <!-- COMMENTS -->
+
+  <section id="comments-{id}" class="comments-wrapper">
+    {item|comments}
+  </section>
+
+</div>

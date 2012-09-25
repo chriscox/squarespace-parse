@@ -1,0 +1,112 @@
+<div id="signup-module">
+    
+  <div id="signup-error" class="error-message">Sorry, registration is now closed for this season.</div>
+
+  <div class="form-wrapper">
+    <form id="signup-form">
+      <div class="field-list clear">
+        <div id="firstName" class="form-item field">
+          <label class="title" for="firstName-field">First Name <span class="required">*</span></label>
+          <input class="field-element" type="text" spellcheck="false" id="firstName-field">
+        </div>
+        <div id="lastName" class="form-item field">
+          <label class="title" for="lastName-field">Last Name <span class="required">*</span></label>
+          <input class="field-element" type="text" spellcheck="false" id="lastName-field">
+        </div>
+        <div id="email" class="form-item field email">
+          <label class="title" for="email-field">Email Address <span class="required">*</span></label>
+          <input class="field-element" type="text" spellcheck="false" id="email-field">
+        </div>
+        <div id="password" class="form-item field password">
+          <label class="title" for="password-field">Password <span class="required">*</span></label>
+          <input class="field-element" type="password" id="password-field">
+        </div>
+        <div id="password2" class="form-item field password">
+          <label class="title" for="password2-field">Confirm Password <span class="required">*</span></label>
+          <input class="field-element" type="password" id="password2-field">
+        </div>
+      </div>
+      <div>
+        <input class="button" type="submit" value="Sign up" disabled>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+  $(function() {
+
+    var hasError = false;
+
+    function isEmpty(field) {
+      var el = $("#" + field);
+      var field = $("#" + field + "-field");
+      if (field.val() == "") {
+        el.addClass("error");
+        hasError = true;
+      } else {
+        el.removeClass("error");
+      }
+    }
+
+    function verifyPasswords() {
+      if ( $("#password-field").val() != $("#password2-field").val() ) {
+        $(".password").addClass("error");
+        hasError = true;
+      } else {
+        $(".password").removeClass("error");
+      }
+    }
+
+    // Signup Submission
+    $("#signup-module #signup-form").submit(function() {
+
+      // signups closed
+      return false;
+
+      hasError = false;
+      $("#signup-error").html("");
+
+      // check if empty
+
+      isEmpty("firstName");
+      isEmpty("lastName");
+      isEmpty("email");
+      isEmpty("password");
+      isEmpty("password2");
+      if (hasError) {
+        $("#signup-error").html("[ Missing required fields. ]");
+        return false;
+      }
+
+      // verify password match
+
+      verifyPasswords();
+      if (hasError) {
+        $("#signup-error").html("[ Your passwords do not match. ]");
+        return false;
+      }
+
+      // signup
+
+      var firstName = $("#firstName-field").val();
+      var lastName = $("#lastName-field").val();
+      var email = $("#email-field").val();
+      var password = $("#password-field").val();
+
+      FootballPool.User.signup(firstName, lastName, email, password, function(user, error) {
+        if (user && !error) {
+          window.location = "/profile";
+        } else {
+          // error
+          $("#signup-error").html("[ " + error.message + " ]");
+        }
+      });
+
+      return false;
+    });
+  });
+</script>
+

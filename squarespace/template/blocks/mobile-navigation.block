@@ -1,0 +1,44 @@
+<div id="topNav">
+<nav class="main-nav mobile-nav"><ul>
+  {.repeated section items}
+
+        {.folder?}
+
+          {.repeated section items}
+
+            <li class="{.section collection}{typeLabel}-collection{.end}{.section active} active-link{.end}{.if collection.folder} folder{.end}{.if folderActive} active-link active-folder{.end}{.section externalLink} external-link{.end}">
+
+              {.section collection}
+                <a href="{fullUrl}">{navigationTitle}</a>
+              {.end}
+
+              {.section externalLink}
+                <a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+              {.end}
+
+            </li>
+
+          {.end}
+
+        {.or}
+
+          <li class="{.section collection}{typeLabel}-collection{.end}{.section active} active-link{.end}{.if collection.folder} folder{.end}{.if folderActive} active-link active-folder{.end}{.section externalLink} external-link{.end}">
+
+            {.section collection}
+              <a href="{fullUrl}">{navigationTitle}</a>
+            {.end}
+
+            {.section externalLink}
+              <a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+            {.end}
+
+          </li>
+
+        {.end}
+
+      
+
+  {.end}
+</ul>
+</nav>
+</div>

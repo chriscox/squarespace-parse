@@ -1,0 +1,31 @@
+<div id="setup-games-module">
+  <div id="saving-indicator" class="activity-indicator">SAVING <img src="/assets/spinner.gif"/></div>
+  <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+
+  <div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
+
+  <div>
+    <div id="gameTime"><input id="dateTimePicker" value="10/10/2012" /></div>
+    <div id="awayTeam"><input id="awayTeamPicker" placeholder="Select team..." /></div>
+    <div id="homeTeam"><input id="homeTeamPicker" placeholder="Select team..." /></div>
+    
+    <div id=""><input type="button" id ="addGame" value="Add Game"/></div>
+    <div id="save-error" class="error-message">[ There was a problem saving this game.  Please try again. ]</div>
+  </div>
+
+  <div class="status-text">
+    <div>
+      <span style="float:left">Game count: <strong id="games-count"></strong></span>
+    </div>
+    <div style="float:right">
+      <!--span><input id="calculate-scores" type="button" value="Calculate" /></span-->
+    </div>
+  </div>
+
+  <div id="setup-games-grid"></div>
+
+</div>
+
+
+
+<squarespace:script src="setup-games.js" combo="false"/>

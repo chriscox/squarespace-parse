@@ -1,0 +1,44 @@
+<div id="user-pick-module">
+	<div id="saving-indicator" class="activity-indicator">SAVING <img src="/assets/spinner.gif"/></div>
+	<div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+	<div id="user-picks">
+		<div id="save-error" class="error-message">[ There was a problem saving your picks.  Please try again. ]</div>
+		<div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
+		<div class="status-text">
+			<div>
+				<span style="float:left">You've selected  <strong id="pick-count"></strong>  of  <strong id="games-count"></strong>  games</span>
+			</div>
+			<div style="float:right">
+				<span id="quickPicker"></span>
+			</div>
+		</div>
+		<div id="user-picks-grid"></div>
+	</div>
+</div>
+
+<squarespace:script src="user-picks.js" combo="false" />
+
+<!-- grid templates -->
+
+<script type="text/x-kendo-template" id="indexTemplate">
+    <div class='game-index #= locked #'>#= gameIndex #</div> 
+</script>
+<script type="text/x-kendo-template" id="dateTemplate">
+    <div class='game-date'>#= date #</div> 
+    <div class='game-time'>#= time #</div> 
+</script>
+<script type="text/x-kendo-template" id="teamTemplate">
+    <div id='cell-#= gameId #-#= teamId #' class='user-pick-team-cell gameId-#= gameId # team-#= teamNickName # #= selected # #= locked #'>
+    	<div class="team-icon team-#= teamNickName #"></div>
+        <div class="team-info">
+      		<div>#= teamName #</div>  
+      		<div class="standings"><span>(W-0, L-0, T-0)</span></div>
+      	</div>  
+      	<div class="spread">#= teamSpread #</div>      	
+    	<div class="selection">
+    		<input class='select-team-button' type='button' value='Pick Team' onclick='addUserPick("#= gameId #", "#= teamId #")'/>
+    		<div class='team-picked'>Picked</div>
+    	</div> 
+    </div>    
+</script>
+

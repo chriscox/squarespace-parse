@@ -1,0 +1,45 @@
+<style type="text/css">
+	#bannerImage { display: none }
+	#logo { display: none }
+</style>
+
+<div id="users-module">
+	<div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+	<div id="user-stats">
+		<div><h2>Chris Cox</h2></div>
+		<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+	</div>
+	<div id="users"></div>
+</div>
+
+
+
+<squarespace:script src="users.js" combo="false" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/highcharts/2.3.1/highcharts.js"></script> 
+
+<!-- <script src="https://code.highcharts.com/modules/exporting.js"></script> -->
+
+<!-- grid templates -->
+
+<script type="text/x-kendo-template" id="indexTemplate">
+    <div class='game-index #= locked #'>#= gameIndex #</div> 
+</script>
+<script type="text/x-kendo-template" id="dateTemplate">
+    <div class='game-date'>#= date #</div> 
+    <div class='game-time'>#= time #</div> 
+</script>
+<script type="text/x-kendo-template" id="teamTemplate">
+    <div id='cell-#= gameId #-#= teamId #' class='user-pick-team-cell gameId-#= gameId # team-#= teamNickName # #= selected # #= locked #'>
+    	<div class="team-icon team-#= teamNickName #"></div>
+        <div class="team-info">
+      		<div>#= teamName #</div>  
+      		<div class="standings"><span>(W-0, L-0, T-0)</span></div>
+      	</div>  
+      	<div class="spread">#= teamSpread #</div>      	
+    	<div class="selection">
+    		<input class='select-team-button' type='button' value='Pick Team' onclick='addUserPick("#= gameId #", "#= teamId #")'/>
+    		<div class='team-picked'>Picked</div>
+    	</div> 
+    </div>    
+</script>
+

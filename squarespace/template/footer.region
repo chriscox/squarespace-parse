@@ -1,0 +1,21 @@
+
+    <div class="page-divider"></div>
+
+    <footer id="footer">
+      <squarespace:block-field id="footerBlock" columns="12" />
+      {.section website}
+        {.if socialAccounts}
+        <div id="footerBlocks-2" class="social-links">
+          {.repeated section socialAccounts}<a{.if profileUrl} href="{profileUrl}" target="_blank"{.or} title="{screenname}"{.end} class="social-{serviceName}"></a>{.end}
+        </div>
+        {.end}
+      {.end}
+    </footer>
+        
+  </div>
+  
+  {squarespace-footers}
+  
+</body>
+
+</html>

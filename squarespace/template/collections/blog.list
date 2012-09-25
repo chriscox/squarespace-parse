@@ -1,0 +1,86 @@
+<div class="article-list hfeed">
+
+{.repeated section items}
+
+<article class="{@|item-classes}" id="article-{id}" data-item-id="{id}">
+ 
+  <!--SPECIAL CONTENT-->
+
+  {.section promotedBlock}
+    <div class="special-content">{@}</div> 
+  {.end}
+
+
+  <!--POST HEADER-->
+    
+  <header>
+    <h1 class="entry-title">
+      {.passthrough?}
+        <a href="{sourceUrl}">{title} <span>&rarr;</span></a>
+      {.or}
+        <a href="{fullUrl}">{title}</a>
+      {.end}
+    </h1>
+    <div class="meta">
+      <span class="date"><time class="published" datetime="{addedOn|date %F}">{addedOn|date %B %e, %G}</time></span>
+    </div>
+  </header>    
+    
+  <!--POST BODY-->
+  
+  {.excerpt?}
+    <div class="body entry-content">{excerpt} <a class="read-more" href="{fullUrl}">Read More</a></div>
+  {.or}
+    {.section body}<div class="body entry-content">{@}</div>{.end}
+  {.end}
+
+              
+  <!--POST FOOTER-->
+    
+  <footer>
+    <div class="meta">
+
+      {postItemInjectCode}
+
+      <div class="first meta-row">
+        {.section categories}<span class="categories"><span class="categories-title">In</span> {.repeated section @}<a href="{collection.fullUrl}?category={@|url-encode}" rel="tag">{@}</a>{.alternates with}, {.end}</span>{.end}
+        {.section tags}<span class="tags"><span class="tags-title">Tags</span> {.repeated section @}<a href="{collection.fullUrl}?tag={@|url-encode}" rel="tag">{@}</a>{.alternates with}, {.end}</span>{.end}
+      </div>
+
+      <div class="second meta-row">
+        {@|like-button}
+       	{.passthrough?}{.or}{.section sourceUrl}<span class="source"><a href="{sourceUrl}" target="_blank">Source</a></span>{.end}{.end} 
+        {.comments?}
+          {.disqus?}
+            <span class="comments"><a href="{fullUrl}#comments-{id}">Leave a Comment</a></span>
+          {.or}
+            {.section publicCommentCount}
+              <span class="comments"><a href="{fullUrl}#comments-{id}">{@} Comment{@|pluralize}</a></span>
+            {.or}
+              <span class="comments"><a href="{fullUrl}#comments-{id}">Comment</a></span>
+            {.end}
+          {.end}
+        {.end}
+        {@|social-button-inline}
+      </div>
+
+    </div>
+  </footer>
+    
+  
+  </article>
+{.alternates with}
+  <div class="post-divider"></div>
+{.end}
+
+
+<!--PAGINATION-->
+
+{.section pagination}
+  <nav class="pagination clear">
+      {.section prevPage}<a class="newer-posts" href="{prevPageUrl}">&larr; Newer Posts</a>{.end}
+      {.section nextPage}<a class="older-posts" href="{nextPageUrl}">Older Posts &rarr;</a>{.end}
+  </nav>
+{.end}
+
+</div>

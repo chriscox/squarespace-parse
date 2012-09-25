@@ -1,0 +1,195 @@
+#fbpool-admin-link { display:none; }
+#fbpool-admin-link.admin { display:block; }
+#fbpool-login #fbpool-login-link { display:block; }
+#fbpool-login #fbpool-logout-link { display:none; }
+#fbpool-login.logged-in { background: url('/universal/images-v6/dialog/select-arrow-dark.png') no-repeat right 50%; padding-right:15px; }
+#fbpool-login.logged-in #fbpool-login-link { display:none; }
+#fbpool-login.logged-in #fbpool-logout-link { display:block; }
+
+
+.activity-indicator { padding:2px 5px; font-size:11px; background-color: #DDD; display:none; -webkit-border-radius:5px; }
+
+#weekPicker { padding-bottom:20px; overflow:hidden; }
+#quickPicker { padding:0 10px; }
+
+.select-week-text { float:left; padding-right: 20px;}
+.status-text { padding: 15px 0 5px 0; overflow:hidden; }
+.week-selector { cursor:pointer; padding:0 8px; float:left; }
+.week-selector.active { font-weight: bold; background-color: #999; color:#FFF; -webkit-border-radius:3px; }
+.week-selector:hover { font-weight: bold; background-color: #DDD; color:#777; -webkit-border-radius:3px; }
+.week-selector-spacer { color:#ccc; padding:0 4px; float:left; }
+
+/*-- forms --*/
+#reset-password-module .form-wrapper { margin-top:20px; }
+
+/*-- login --*/
+#login-module { overflow:hidden; }
+#login-module #existing-user { float:left; width:400px; }
+#login-module #new-user { float:right; width:300px; margin-left:40px; padding:0 40px 40px; background-color:#f5f5f5;}
+#login-module #guest-user { float:right; width:300px; margin:30px 0 0 40px; padding:0 40px 40px; background-color:#f5f5f5; overflow: hidden; }
+
+/*-- errors --*/
+
+.error-message { color: #F00; font-weight: bold; padding:10px 0;}
+
+.game-index { font-size:20px; text-align:left;}
+
+/*-- grids --*/
+
+.k-grid .game-date {  }
+.k-grid .game-time { font-size:11px; color:#777; }
+.k-grid .bottom-dotted { border-bottom:1px dotted #DDD;}
+
+.table thead {  }
+.table thead th { vertical-align: middle !important; }
+.table .horz-center { text-align: center}
+
+/*-- user pick module --*/
+
+#user-pick-module { padding-top: 20px; }
+#user-pick-module .activity-indicator { position: absolute; right: 0; top:-10px; }
+#user-picks #save-error { display: none; padding-bottom: 10px; }
+
+.game-index.locked { background: url('/assets/lock-icon.png') no-repeat right center; }
+.user-pick-team-cell.locked .select-team-button { display: none; }
+
+
+.user-pick-team-cell.locked { }
+.user-pick-team-cell .team-picked { display:none; line-height:50px; padding-left:38px; color:#74B73A; font-weight: bold; background:url('/assets/green-checkmark.png') no-repeat 8px 50%; }
+
+.user-pick-team-cell { float: left; }
+.user-pick-team-cell .select-team-button { float:left; margin-top: 10px; }
+.user-pick-team-cell .selection { float:left; height:50px;}
+
+.user-pick-team-cell .team-icon { float:left; height:50px; width:50px; background: url('/assets/teams.png') no-repeat left 0; }
+.user-pick-team-cell .team-info { float:left; padding-left: 10px; width:140px; margin-top: 4px; }
+.user-pick-team-cell .standings { font-size:11px; color:#777;}
+.user-pick-team-cell .spread { float:left; height:50px; width:35px; line-height:50px; font-size:14px; color:#FF6666; }
+
+.user-pick-team-cell.selected {  }
+.user-pick-team-cell.selected .select-team-button { display: none }
+.user-pick-team-cell.selected .team-picked { display:block; }
+
+/*-- games module --*/
+
+#games-module { padding-top: 20px; }
+#games-module .activity-indicator { position: absolute; right: 0; top:-10px; }
+#games-module #games-grid .k-alt td { border-top: 1px solid #C5C5C5; border-bottom: 1px solid #C5C5C5; }
+.game-team-cell { float: left; width:100%; }
+.game-team-cell .team-info { position:relative; padding-left: 34px; height:30px; line-height:30px; background: url('/assets/teams-small.png') no-repeat left 0;}
+.game-team-cell .team-info .playingAsAway { position: absolute; top: 0;	right: 15px; font-weight:bold; font-size:11px;}
+.game-team-cell .team-info .playingAsHome { position: absolute; top: 0;	right: 15px; font-weight:bold; font-size:11px;}
+.game-cell { line-height:30px; }
+.game-cell.centered { text-align: center;}
+.game-cell .split-cell { height:30px; }
+.game-cell .game-winner { font-weight: bold; font-size:14px; }
+.game-cell .spread-winner { background:url('/assets/green-checkmark.png') no-repeat 8px 50%;  }
+.game-cell input { font-size:12px !important; padding:4px 0; width:90px; display:none; float:left; }
+.game-cell .split-cell input.top { margin-top: 6px;}
+.game-cell .split-cell input.bottom { margin-top: 6px;}
+.game-cell input.active { display:block;}
+
+.k-grid td.k-state-selecting { overflow: visible; }
+
+#games-grid-wrapper { position: relative;}
+#game-players ul { list-style: none; margin: 0; padding:10px;}
+#game-players li { background: url('/assets/user.png') no-repeat 0 50%; }
+#game-players li a { font-size:11px; padding-left:28px;}
+#game-players {
+	width: 145px;
+	background-color: #F5F5F5;
+	position: absolute;
+	right: -10px;
+	top: 48px;
+	border: 1px solid #C5C5C5;
+	-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  
+    -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+    -webkit-border-radius:3px;
+    display: none;
+}
+#game-players #notch {  }
+#game-players #notch .arrow {
+	width: 0;
+	height: 0;
+	border-bottom: 15px solid transparent;
+	border-top: 15px solid transparent;
+	border-right: 15px solid #F5F5F5;
+	position: absolute;
+	left: 0;
+	top: 10px;
+	margin-top: -25px;
+}
+
+#game-players #notch.arrow-border {
+	width: 0;
+	height: 0;
+	border-bottom: 15px solid transparent;
+	border-top: 15px solid transparent;
+	border-right: 15px solid #000;
+	position: absolute;
+	left: -15px;
+	top: 10px;
+}
+
+/*-- leaderboard module --*/
+
+#leaderboard-module { padding-top: 20px; }
+#leaderboard-module .activity-indicator { position: absolute; right: 0; top:-10px; }
+#leaderboard-module #viewPicker { padding-bottom:20px; overflow:hidden; }
+.select-view-text { float:left; padding-right: 20px;}
+.view-selector { cursor:pointer; padding:0 8px; float:left; width:120px; text-align: center;}
+.view-selector.active { background-color: #999; color:#FFF; -webkit-border-radius:3px; }
+.view-selector:hover { background-color: #DDD; color:#777; -webkit-border-radius:3px; }
+.view-selector-spacer { color:#ccc; padding:0 4px; float:left; }
+
+
+/*-- ADMIN - Setup Games module --*/
+#setup-games-module .activity-indicator { position: absolute; right: 0; top:-10px; }
+#setup-games-module #save-error { display: none; padding-bottom: 10px; }
+
+#user-pick-module #logged-as-user { background-color: #CC4; 
+	padding: 20px;
+	margin: 0 0 30px 0;
+	color: black;
+	font-weight: bold;
+	border: 1px solid black;
+}
+
+
+/*-- team icons --*/
+
+@iconSize: -50px;
+
+.team-Cardinals { background-position:0 @iconSize * 0 !important; }
+.team-Falcons 	{ background-position:0 @iconSize * 1 !important; }
+.team-Ravens 	{ background-position:0 @iconSize * 2 !important; }
+.team-Bills 	{ background-position:0 @iconSize * 3 !important; }
+.team-Panthers 	{ background-position:0 @iconSize * 4 !important; }
+.team-Bears 	{ background-position:0 @iconSize * 5 !important; }
+.team-Bengals 	{ background-position:0 @iconSize * 6 !important; }
+.team-Browns 	{ background-position:0 @iconSize * 7 !important; }
+.team-Cowboys 	{ background-position:0 @iconSize * 8 !important; }
+.team-Broncos 	{ background-position:0 @iconSize * 9 !important; }
+.team-Lions 	{ background-position:0 @iconSize * 10 !important; }
+.team-Packers 	{ background-position:0 @iconSize * 11 !important; }
+.team-Texans 	{ background-position:0 @iconSize * 12 !important; }
+.team-Colts 	{ background-position:0 @iconSize * 13 !important; }
+.team-Jaguars 	{ background-position:0 @iconSize * 14 !important; }
+.team-Chiefs 	{ background-position:0 @iconSize * 15 !important; }
+.team-Dolphins 	{ background-position:0 @iconSize * 16 !important; }
+.team-Vikings 	{ background-position:0 @iconSize * 17 !important; }
+.team-Patriots 	{ background-position:0 @iconSize * 18 !important; }
+.team-Saints 	{ background-position:0 @iconSize * 19 !important; }
+.team-Giants 	{ background-position:0 @iconSize * 20 !important; }
+.team-Jets	 	{ background-position:0 @iconSize * 21 !important; }
+.team-Raiders 	{ background-position:0 @iconSize * 22 !important; }
+.team-Eagles 	{ background-position:0 @iconSize * 23 !important; } 
+.team-Steelers 	{ background-position:0 @iconSize * 24 !important; }
+.team-Chargers 	{ background-position:0 @iconSize * 25 !important; }
+.team-49ers 	{ background-position:0 @iconSize * 26 !important; }
+.team-Seahawks 	{ background-position:0 @iconSize * 27 !important; }
+.team-Rams	 	{ background-position:0 @iconSize * 28 !important; }
+.team-Buccaneers{ background-position:0 @iconSize * 29 !important; }
+.team-Titans 	{ background-position:0 @iconSize * 30 !important; }
+.team-Redskins 	{ background-position:0 @iconSize * 31 !important; }
+

@@ -1,0 +1,13 @@
+<div id="administration-module">
+
+  <input type="button" value="Setup Games" onclick="javascript:window.location='/setup-games'" />
+  <input type="button" value="Setup Players" onclick="javascript:window.location='/setup-users'" />
+
+
+</div>
+
+<script type="text/javascript">
+  if (!FootballPool.User.isAdministrator()) {
+    window.location = "/not-found";
+  } 
+</script>

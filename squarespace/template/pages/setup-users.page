@@ -1,0 +1,28 @@
+<div id="setup-users-module">
+  <div id="saving-indicator" class="activity-indicator">SAVING <img src="/assets/spinner.gif"/></div>
+  <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+
+  <!-- <div><div class="select-user-text">Select User: </div><div id="userPicker"></div></div> -->
+
+  <div class="status-text">
+    <div>
+      <!-- <span style="float:left">Game count: <strong id="games-count"></strong></span> -->
+    </div>
+    <div style="float:right">
+      <span id="quickPicker"></span>
+    </div>
+  </div>
+
+  <div id="setup-users-grid"></div>
+
+</div>
+
+<squarespace:script src="setup-users.js" combo="false"/>
+
+<script type="text/x-kendo-template" id="nameTemplate">
+    <div>#= firstName # #= lastName #</div> 
+</script>
+
+<script type="text/x-kendo-template" id="countTemplate">
+    <div><a href="/user-picks/?userId=#= userId #\\\#week=#= week #">#= count #</a></div> 
+</script>

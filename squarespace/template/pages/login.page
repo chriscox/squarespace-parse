@@ -1,0 +1,82 @@
+<div id="login-module">
+  <div id="existing-user">
+    
+    <div id="login-error" class="error-message"></div>
+
+    <div class="form-wrapper">
+      <form id="user-login-form">
+        <div class="field-list clear">
+          <div id="email" class="form-item field email">
+            <label class="title" for="email-field">Email Address <span class="required">*</span></label>
+            <input class="field-element" type="text" spellcheck="false" id="email-field"/>
+          </div>
+          <div id="password" class="form-item field password">
+            <label class="title" for="password-field">Password <span class="required">*</span></label>
+            <input class="field-element" type="password" id="password-field"/>
+          </div>
+        </div>
+        <div>
+          <input class="button" type="submit" value="Login" style="float:left"/>
+          <a href="/reset-password" style="float:right">Forgot your password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <div id="new-user" class="form-wrapper">
+
+    <div><h3>Not a Member?</h3></div>
+    <div>Click here to sign up for Mike's NFL Pool.</div>
+    <input class="button" type="submit" value="Sign up" onclick="javascript:location='/signup';return false;">
+
+  </div>
+
+  <div id="guest-user" class="form-wrapper">
+    <div><h3>Play as Guest?</h3></div>
+    <div>Click here if you would like to play as Guest. You will share picks between all Guest players.</div>
+    <input class="button" type="submit" value="Play As Guest" style="float:left"/>
+  </div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+  $(function() {
+
+    // Login Submission
+    $("#login-module #user-login-form").submit(function() {
+      FootballPool.User.login($("#login-module #email-field").val(), $("#login-module #password-field").val(), function(user, error) {
+        if (user && !error) {
+          var redirect = FootballPool.URL.getHash("redirect");
+          if (redirect) {
+            window.location = FootballPool.URL.getHash("redirect");
+          } else {
+            window.location = "/profile";
+          }       
+        } else {
+          // error
+          $("#login-error").html("[ " + error.message + " ]");
+        }
+      });
+      return false;
+    });
+
+    // Guest login
+    $("#guest-user input").click(function() {
+      FootballPool.User.loginAsGuest(function(user, error) {
+        if (user && !error) {
+          window.location = "/user-picks";     
+        } else {
+          // error
+          $("#login-error").html("[ " + error.message + " ]");
+        }
+      });
+      return false;
+    });
+  });
+</script>
+

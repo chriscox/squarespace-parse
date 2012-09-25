@@ -1,0 +1,72 @@
+<div id="topNav">
+  <nav class="main-nav dropdown-hover desktop-nav"><ul>
+    {.repeated section items}
+
+      <li class="{.section collection}{typeLabel}-collection{.end}{.section active} active-link{.end}{.if collection.folder} folder{.end}{.if folderActive} active-link active-folder{.end}{.section externalLink} external-link{.end}" id="{.section collection}{id}{.end}{.section externalLink}{title|slugify}{.end}">
+
+        {.folder?}
+
+          <a>{collection.navigationTitle}</a>
+          <div class="notch"></div>
+          <div class="subnav">
+            <ul>
+              {.repeated section items}
+                {.collection?}
+                  <li class="{collection.typeLabel}-collection{.section active} active-link{.end}">
+                    <a href="{collection.fullUrl}">{collection.navigationTitle}</a>
+                  </li>
+                {.end}
+                {.section externalLink}
+                  <li class="external-link">
+                    <a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+                  </li>
+                {.end}
+              {.end}
+            </ul>
+          </div>
+
+        {.or}
+
+          {.section collection}
+            <a href="{fullUrl}">{navigationTitle}</a>
+          {.end}
+
+          {.section externalLink}
+            <a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+          {.end}
+
+
+        {.end}
+
+      </li>
+
+    {.end}
+
+      <li id="mobileMenuLink"><a>Menu</a></li>
+
+      <li id="fbpool-login" class="folder external-link">
+        <!-- Logged out -->
+        <a id="fbpool-login-link" href="/login">Login</a>
+        <!-- Logged in -->
+        <div id="fbpool-logout-link">
+          <a id="fbpool-user"></a>
+          <div class="notch"></div>
+          <div class="subnav">
+            <ul>
+              <li class="active-link">
+                <a href="/profile">Profile</a>
+              </li>
+              <li id="fbpool-admin-link" class="active-link" style="display:none">
+                <a href="/administration">Administration</a>
+              </li>
+              <li class="active-link">
+                <a href="javascript:FootballPool.User.logout();location.reload(true);">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+       </li>
+  </ul>
+  </nav>
+  
+</div>
