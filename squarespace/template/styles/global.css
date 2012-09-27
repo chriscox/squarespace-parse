@@ -1,3 +1,12 @@
+/* ****************************************************************
+   ****************************************************************
+    These Tweak comments are part of an unfinished style editor component.
+    These can be changed by Squarespace at any time without warning.
+    Please do NOT RELY on them at this time.
+   ****************************************************************
+*/
+
+
 // tweak: { type:'color', title:'Site Background', target: 'body'}
 @background: #fbf7f0;
 
