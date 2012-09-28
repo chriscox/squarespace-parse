@@ -1,0 +1,47 @@
+<div class="article-wrapper">
+
+{.section item}
+
+<article class="{@|item-classes}" id="article-{id}" data-item-id="{id}">
+
+  <!--POST HEADER-->
+    
+  <header>
+    <h1 class="entry-title">
+      {.passthrough?}
+        <a href="{sourceUrl}">{title} <span>&rarr;</span></a>
+      {.or}
+        <a href="{fullUrl}">{title}</a>
+      {.end}
+    </h1>
+  </header>
+    
+  <!--POST BODY-->
+  
+  <div class="body entry-content">
+
+    <div id="player-picks-module">
+      <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+
+      <div>
+        <div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
+      </div>
+
+      <div id="player-picks-grid"></div>
+    </div>
+
+
+   </div>
+  
+  </article>
+{.end}
+
+  <!-- COMMENTS -->
+
+  <section id="comments-{id}" class="comments-wrapper">
+    {item|comments}
+  </section>
+
+</div>
+
+<squarespace:script src="player-picks.js" combo="false" />
