@@ -10,143 +10,167 @@ if (!FootballPool.User.isLoggedIn()) {
 
 $("#loading-indicator").fadeIn();
 
+var headerTemplate = _.template("<thead class=''>" +
+  "<tr>" +
+    "<th rowspan='2' class='horz-center'>#</th>" +
+    "<th>Name</th>" +
+    "<th class='horz-center'>Week-<%= week %> Pick Count</th>" +
+    "<th class='horz-center'></th>" +
+  "</tr>" +
+  "</thead>"
+);
+
+var rowTemplate = _.template("<tr>"+
+     "<td class='horz-center'><%= playerIndex %></td>" +
+     "<td class=''><%= name %></td>"+
+     "<td class='horz-center'><%= count %></td>"+
+     "<td class='login-user'><a href='/user-picks/?userId=<%= userId %>#week=<%= week %>'>[ Log In As User ]</a></td>"+
+     "</tr>");
+
+
+
+/** View representing a table */
+var TableView = Parse.View.extend({
+    tagName: 'table',
+    className: 'table table-striped table-condensed',
+
+    initialize : function() {
+        _.bindAll(this,'render','renderOne');
+        this.render();
+    },
+    render: function() {
+      $("#setup-users-grid").html('');
+      this.renderHeader();  
+      this.collection.each(this.renderOne);
+      $("#setup-users-grid").append(this.$el);
+      return this;
+    },
+    renderHeader: function() {
+      var header = new HeaderView();
+      this.$el.append(header.render().$el);
+      return this;
+    },
+    renderOne : function(model) {
+      var row = new RowView({model:model});
+      this.$el.append(row.render().$el);
+      return this;
+    }
+});
+
+var HeaderView = Parse.View.extend({  
+  render: function() {
+    var html = headerTemplate();
+    this.setElement( $(html) );
+    return this;
+  }
+});
+
+/** View representing a row of that table */
+var RowView = Parse.View.extend({  
+    render: function() {
+      var html = rowTemplate(this.model.toJSON());
+      this.setElement( $(html) );
+      return this;
+    }
+});
+
 // get scope
 
 var user = FootballPool.User.getCurrentUser();
 var season = FootballPool.Utils.getCurrentSeason();
 var week = parseInt(FootballPool.URL.getHash("week", FootballPool.Utils.getCurrentWeek()));
 
-// user picks
-
-var UserPick = Parse.Object.extend("UserPick");
-var queryUserPicks = new Parse.Query(UserPick);
-queryUserPicks.equalTo("season", season);
-queryUserPicks.limit(1000);
-var UserPickCollection = Parse.Collection.extend({
-  model:UserPick,
-  query:queryUserPicks
-});
-var userPickCollection = new UserPickCollection;
-
-
 // get users
 
-var User = Parse.Object.extend("User");
-var UserCollection = Parse.Collection.extend({
-  model: User
-});
-var userCollection = new UserCollection;
-userCollection.comparator = function(object) {
-  return object.get("firstName");
+var userQuery = new Parse.Query("User");
+userQuery.ascending("firstName");
+
+// get user picks
+
+var userPickCollection = FootballPool.Data.getCollection("UserPick");
+userPickCollection.query.equalTo("season", season);
+userPickCollection.query.equalTo("week", week);
+userPickCollection.query.include("user");
+userPickCollection.query.limit(1000);
+userPickCollection.query.matchesQuery("user", userQuery);
+userPickCollection.comparator = function(object) {
+  return object.get("user").get("firstName");
 };
 
-var userFetchBlock = {
+var fetchBlock = {
   success: function(collection) {
 
-    collection.each(function(object) {    
+    // create indexed array of users by Id
 
-      var picks = new Array();
-
-      userPickCollection.each(function(userPick){        
-        if (userPick.get("user").id == object.id) {
-
-          var week = userPick.get("week");
-          var count = (picks["w" + week]) ? picks["w" + week] : 0;
-          picks["w" + week] = count+=1
-       
-        }        
-      });
-
-      // get individual counts   
-      
-      object.set({"w1": (picks["w1"]) ? picks["w1"] : "0"});
-      object.set({"w2": (picks["w2"]) ? picks["w2"] : "0"});
-      object.set({"w2": (picks["w2"]) ? picks["w2"] : "0"});
-      object.set({"w3": (picks["w3"]) ? picks["w3"] : "0"});
-      object.set({"w4": (picks["w4"]) ? picks["w4"] : "0"});
-      object.set({"w5": (picks["w5"]) ? picks["w5"] : "0"});
-      object.set({"w6": (picks["w6"]) ? picks["w6"] : "0"});
-      object.set({"w7": (picks["w7"]) ? picks["w7"] : "0"});
-      object.set({"w8": (picks["w8"]) ? picks["w8"] : "0"});
-      object.set({"w9": (picks["w9"]) ? picks["w9"] : "0"});
-      object.set({"w10": (picks["w10"]) ? picks["w10"] : "0"});
-      object.set({"w11": (picks["w11"]) ? picks["w11"] : "0"});
-      object.set({"w12": (picks["w12"]) ? picks["w12"] : "0"});
-      object.set({"w13": (picks["w13"]) ? picks["w13"] : "0"});
-      object.set({"w14": (picks["w14"]) ? picks["w14"] : "0"});
-      object.set({"w15": (picks["w15"]) ? picks["w15"] : "0"});
-      object.set({"w16": (picks["w16"]) ? picks["w16"] : "0"});
-      object.set({"w17": (picks["w17"]) ? picks["w17"] : "0"});
-
-      object.set({"playerIndex": collection.indexOf(object)+1});
-      object.set({"userId": object.id});
-
+    collection.each(function(object) {
+      object.set("userId", object.get("user").id);
     });
 
-    gridView = new GridView({collection:collection});
-    $("#loading-indicator").fadeOut();
+    var arr = _.toArray(collection);
+    var attr = _.pluck(arr, 'attributes');
+    var usersById = _.groupBy(attr, 'userId');
 
+    // show each user
+
+    userQuery.collection().fetch({
+      success: function(users) {
+        users.each(function(object){
+
+          if (usersById[object.id] != null) {
+            object.set("count", usersById[object.id].length);
+          } else {
+            object.set("count", 0);
+          }
+          object.set("name", object.get("firstName") + " " + object.get("lastName").substring(0,1));
+          object.set({"playerIndex": users.indexOf(object)+1});
+          object.set({"userId": object.id});
+        });
+
+        var tableView = new TableView({collection: users});   
+        $("#loading-indicator").fadeOut(); 
+      }, 
+      error:function(users, error) {
+        $("#loading-indicator").fadeOut();
+      }
+    });
   },
   error: function(collection, error) {
     $("#loading-indicator").fadeOut();
   }
-}
+};
 
-var GridView = Parse.View.extend({
+userPickCollection.fetch(fetchBlock);
 
-  initialize: function() {
-    _.bindAll(this, 'render');               
+
+// Week selector
+
+var WeekList = Parse.View.extend({
+  events: { 'click': 'selectionChanged'},
+  initialize: function(){
+    _.bindAll(this, 'render');
     this.render();
   },
 
-  render: function(){
-    // console.log(JSON.stringify(this.collection.toJSON()));
-
-    var nameTemplate = kendo.template($("#nameTemplate").html());
-    var countTemplate = kendo.template($("#countTemplate").html());
-
-    $("#setup-users-grid").kendoGrid({
-      selectable: "multiple cell",
-      columns: [
-        {title:"#", width:30, field:"playerIndex"},
-        {title:"Player", template: nameTemplate({firstName:"${firstName}", lastName:"${lastName}"})},
-        {title:"1", width:30, template: countTemplate({userId:"${userId}", week:"1", count:"${w1}"})},
-        {title:"2", width:30, template: countTemplate({userId:"${userId}", week:"2", count:"${w2}"})},
-        {title:"3", width:30, template: countTemplate({userId:"${userId}", week:"3", count:"${w3}"})},
-        {title:"4", width:30, template: countTemplate({userId:"${userId}", week:"4", count:"${w4}"})},
-        {title:"5", width:30, template: countTemplate({userId:"${userId}", week:"5", count:"${w5}"})},
-        {title:"6", width:30, template: countTemplate({userId:"${userId}", week:"6", count:"${w6}"})},
-        {title:"7", width:30, template: countTemplate({userId:"${userId}", week:"7", count:"${w7}"})},
-        {title:"8", width:30, template: countTemplate({userId:"${userId}", week:"8", count:"${w8}"})},
-        {title:"9", width:30, template: countTemplate({userId:"${userId}", week:"9", count:"${w9}"})},
-        {title:"10", width:30, template: countTemplate({userId:"${userId}", week:"10", count:"${w10}"})},
-        {title:"11", width:30, template: countTemplate({userId:"${userId}", week:"11", count:"${w11}"})},
-        {title:"12", width:30, template: countTemplate({userId:"${userId}", week:"12", count:"${w12}"})},
-        {title:"13", width:30, template: countTemplate({userId:"${userId}", week:"13", count:"${w13}"})},
-        {title:"14", width:30, template: countTemplate({userId:"${userId}", week:"14", count:"${w14}"})},
-        {title:"15", width:30, template: countTemplate({userId:"${userId}", week:"15", count:"${w15}"})},
-        {title:"16", width:30, template: countTemplate({userId:"${userId}", week:"16", count:"${w16}"})},
-        {title:"17", width:30, template: countTemplate({userId:"${userId}", week:"17", count:"${w17}"})},
-      ],
-      dataSource: {
-        data: this.collection.toJSON()            
-      }
-    });
-
+  render: function() {
+    for (var i=1; i<=17; i++) {
+      var isActive = (week == i) ? "active" : "";
+      var elem = $(this.el).append("<div class='week-selector " + isActive + "'>" + i + "</div><div class='week-selector-spacer'>|</div>");
+    }     
     return this;
+  },
 
+  selectionChanged: function(e) {
+    if ($(e.target).hasClass("week-selector")) {
+      $("#loading-indicator").fadeIn();
+      week = parseInt($(e.target).text());
+      FootballPool.URL.setHash("week", week);         
+      $(".week-selector").removeClass("active");
+      $(e.target).addClass("active");
+      userPickCollection.query.equalTo("week", week);
+      userPickCollection.fetch(fetchBlock);
+    }
   }
 });
 
-
-// fetch data
-
-userPickCollection.fetch({
-  success: function(userPicks){
-
-    userCollection.fetch(userFetchBlock);
-
-  }
-});
-
-
+var weekList = new WeekList();
+$("#weekPicker").append(weekList.el);

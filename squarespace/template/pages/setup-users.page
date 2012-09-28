@@ -2,6 +2,8 @@
   <div id="saving-indicator" class="activity-indicator">SAVING <img src="/assets/spinner.gif"/></div>
   <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
 
+  <div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
+
   <!-- <div><div class="select-user-text">Select User: </div><div id="userPicker"></div></div> -->
 
   <div class="status-text">
