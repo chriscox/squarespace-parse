@@ -142,6 +142,15 @@
 .view-selector:hover { background-color: #DDD; color:#777; -webkit-border-radius:3px; }
 .view-selector-spacer { color:#ccc; padding:0 4px; float:left; }
 
+/*-- player picks module --*/
+
+#player-picks-module { padding-top: 20px; }
+#player-picks-module .activity-indicator { position: absolute; right: 0; top:-10px; }
+#player-picks-module .teams { line-height:14px; }
+#player-picks-module .small  { font-size:8px; }
+#player-picks-module .player-pick  { font-size:11px; }
+#player-picks-module .player-pick.winner  { color:green; font-weight:bold; }
+
 
 /*-- ADMIN - Setup Games module --*/
 #setup-games-module .activity-indicator { position: absolute; right: 0; top:-10px; }
@@ -194,4 +203,13 @@
 .team-Buccaneers{ background-position:0 @iconSize * 29 !important; }
 .team-Titans 	{ background-position:0 @iconSize * 30 !important; }
 .team-Redskins 	{ background-position:0 @iconSize * 31 !important; }
+
+/*-- printing --*/
+
+@media only print  {
+	#header { display:none; }
+	#bannerImage { display:none; }
+	.sqsp-chrome { display:none; }
+	body { background:none;}
+}
 

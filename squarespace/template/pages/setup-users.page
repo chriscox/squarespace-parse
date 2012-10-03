@@ -20,11 +20,3 @@
 </div>
 
 <squarespace:script src="setup-users.js" combo="false"/>
-
-<script type="text/x-kendo-template" id="nameTemplate">
-    <div>#= firstName # #= lastName #</div> 
-</script>
-
-<script type="text/x-kendo-template" id="countTemplate">
-    <div><a href="/user-picks/?userId=#= userId #\\\#week=#= week #">#= count #</a></div> 
-</script>

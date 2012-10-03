@@ -127,8 +127,6 @@ var fetchBlock = {
         userQuery.collection().fetch({          
           success: function(users) {
 
-            console.log("loading...");
-
             users.each(function(user){
 
               var picks = picksByUserId[user.id];
