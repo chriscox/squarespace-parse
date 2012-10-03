@@ -80,6 +80,13 @@ var HeaderView = Parse.View.extend({
 /** View representing a row of that table */
 var RowView = Parse.View.extend({  
     render: function() {
+
+      if (view == "money") {
+        if (this.model.get("user").get("robot")) {
+          return this;
+        }
+      }    
+
       var html = rowTemplate(this.model.toJSON());
       this.setElement( $(html) );
       return this;
@@ -116,13 +123,11 @@ var fetchBlock = {
       for (week in moneyWins) {
         moneyTotal += moneyWins[week];
       }
-      object.set({"moneyTotal": moneyTotal}); 
-       
+      object.set({"moneyTotal": moneyTotal});        
 
       object.set({"total": (view == "overall") ? winTotal : moneyTotal}); 
 
     });
-
     
     collection.sort();
     collection.each(function(object) {
