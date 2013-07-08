@@ -1,54 +1,19 @@
-<div class="article-wrapper">
+<div id="games-module">
+  <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+  <div id="games">
+    <div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
 
-{.section item}
-
-<article class="{@|item-classes}" id="article-{id}" data-item-id="{id}">
-
-  <!--POST HEADER-->
-    
-  <header>
-    <h1 class="entry-title">
-      {.passthrough?}
-        <a href="{sourceUrl}">{title} <span>&rarr;</span></a>
-      {.or}
-        <a href="{fullUrl}">{title}</a>
-      {.end}
-    </h1>
-  </header>
-    
-  <!--POST BODY-->
-  
-  <div class="body entry-content">
-
-    <div id="games-module">
-      <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
-      <div id="games">
-        <div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
-
-        <div id="games-grid-wrapper">
-          <div id="games-grid"></div>
-          <div id="game-players">
-            <div id="notch" class="arrow-border">
-              <div class="arrow"></div>
-            </div>
-            <div id="team"></div>
-            <div><ul id="player-list"></ul></div>
-          </div>
+    <div id="games-grid-wrapper">
+      <div id="games-grid"></div>
+      <div id="game-players">
+        <div id="notch" class="arrow-border">
+          <div class="arrow"></div>
         </div>
+        <div id="team"></div>
+        <div><ul id="player-list"></ul></div>
       </div>
     </div>
-
-   </div>
-  
-  </article>
-{.end}
-
-  <!-- COMMENTS -->
-
-  <section id="comments-{id}" class="comments-wrapper">
-    {item|comments}
-  </section>
-
+  </div>
 </div>
 
 <squarespace:script src="games.js" combo="false" />
@@ -92,4 +57,3 @@
     <div class='split-cell home'><input id="team-cell-#= homeTeamId #" type="button" value="#= homePicks # &raquo;" class="#= hasHomePicks # bottom" /></div>
   </div>
 </script>
-

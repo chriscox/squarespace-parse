@@ -1,0 +1,11 @@
+<div id="player-picks-module">
+      <div id="loading-indicator" class="activity-indicator">LOADING <img src="/assets/spinner.gif"/></div>
+
+      <div>
+        <div><div class="select-week-text">Select Week: </div><div id="weekPicker"></div></div>
+      </div>
+
+      <div id="player-picks-grid"></div>
+    </div>
+
+<squarespace:script src="player-picks.js" combo="false" />
