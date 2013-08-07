@@ -9,10 +9,10 @@ So… I created this site to explore what's possible.
 Demo
 ----
 
-Example Site: [Mike's NFL Pool](http://mikespool.com/games/)
+Example Site: [Mike's NFL Pool](http://mikespool.squarespace.com/games/)
 
 
-[Mikes NFL Pool](http://mikespool.com) is a fun football pool site I created for my father-in-law. You can view the site or even login as a guest user and play along.
+[Mikes NFL Pool](http://mikespool.squarespace.com) is a fun football pool site I created for my father-in-law. You can view the site or even login as a guest user and play along.
 
 Quick Summary of Steps
 ----------------------
